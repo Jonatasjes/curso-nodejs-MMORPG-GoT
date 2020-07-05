@@ -1,1 +1,1 @@
-# curso-nodejs-MMORPG-GoT
+Projeto do Curso completo do Desenvolvedor NodeJS e MongoDB
