@@ -16,5 +16,12 @@ module.exports.controllerCadastrar = (app,req,res) => {
         res.render('cadastro', {validacao: erros, dadosForm: dadosForm})
         return
     }
+
+    var connection = app.config.dbConnection
+
+    var UsuariosDAO = new app.app.models.UsuariosDAO(connection)
+
+    UsuariosDAO.inserirUsuario(dadosForm)
+
     res.send('Podemos cadastrar')
 }

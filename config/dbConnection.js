@@ -6,7 +6,7 @@ const connMongoDB = () => {
     const db = new mongo.Db(
         'got',
         new mongo.Server(
-            'localhost/3000',
+            'localhost',
             27017,
             {}
         ),
