@@ -7,3 +7,9 @@ module.exports.controllerJogo = (app,req,res)=>{
     }
     
 }
+
+module.exports.controllerSair = (app,req,res)=>{
+    req.session.destroy((err)=>{
+        res.render('index', { validacao: {} })
+    })
+}
