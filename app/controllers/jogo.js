@@ -1,10 +1,17 @@
 module.exports.controllerJogo = (app,req,res)=>{
 
-    if(req.session.autorizado){
-        res.render('jogo', {img_casa: req.session.casa})
-    } else {
+    if(req.session.autorizado !== true){
         res.send('Usuário precisa fazer login')
+        return
     }
+
+    const usuario = req.session.usuario
+    const casa = req.session.casa
+
+    const connection = app.config.dbConnection
+    const JogoDAO = new app.app.models.JogoDAO(connection)
+
+    JogoDAO.iniciaJogo(res, usuario, casa)
     
 }
 
