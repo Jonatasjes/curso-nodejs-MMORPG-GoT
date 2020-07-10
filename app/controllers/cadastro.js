@@ -3,25 +3,27 @@ module.exports.controllerCadastro = (app, req, res) => {
 }
 
 module.exports.controllerCadastrar = (app,req,res) => {
-    var dadosForm = req.body
+    const dadosForm = req.body
 
     req.assert('nome', 'Nome não pode ser vazio.').notEmpty()
     req.assert('usuario', 'Usuário não pode ser vazio.').notEmpty()
     req.assert('senha', 'Senha não pode ser vazio.').notEmpty()
     req.assert('casa', 'Casa não pode ser vazio.').notEmpty()
 
-    var erros = req.validationErrors()
+    const erros = req.validationErrors()
 
     if(erros){
         res.render('cadastro', {validacao: erros, dadosForm: dadosForm})
         return
     }
 
-    var connection = app.config.dbConnection
+    const connection = app.config.dbConnection
 
-    var UsuariosDAO = new app.app.models.UsuariosDAO(connection)
+    const UsuariosDAO = new app.app.models.UsuariosDAO(connection)
+    const JogoDAO = new app.app.models.JogoDAO(connection)
 
     UsuariosDAO.inserirUsuario(dadosForm)
+    JogoDAO.gerarParametros(dadosForm.usuario)
 
     res.send('Podemos cadastrar')
 }
